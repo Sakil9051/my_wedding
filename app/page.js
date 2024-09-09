@@ -233,7 +233,7 @@ export default function Home() {
 
             {modalOpen && (
                 <div className="modal fixed inset-0 text-black bg-black bg-opacity-50 flex items-center justify-center p-4 z-[100]">
-                    <div className="modal-content relative max-w-lg w-full mx-auto rounded bg-white p-8 shadow-lg">
+                    <div className="modal-content max-sm:overflow-y-auto max-sm:h-[90vh] relative max-w-lg w-full mx-auto rounded bg-white p-8 shadow-lg">
                         <button className="close absolute top-2 right-2 text-3xl cursor-pointer" onClick={() => setModalOpen(false)}><FaRegSmileBeam /></button>
                         <p className="text-sm text-gray-600">
                             <FaGift className="inline mr-2" /> Thank you from the bottom of our hearts for being a part of our special day and making it even more memorable! Your presence, love, and support mean the world to us, and we feel incredibly blessed to share these precious moments with the people we cherish. We are grateful to have you by our side as we embark on this beautiful new journey together. Thank you for celebrating with us and for all your well-wishes. We will forever treasure the memories we’ve created together today! 🎉
