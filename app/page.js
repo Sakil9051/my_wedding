@@ -121,7 +121,7 @@ export default function Home() {
             {contentVisible && (
                 <>
                     <motion.div
-                        className="card absolute max-w-lg w-[90%] sm:w-full  bg-white top-[10%] left-5 sm:top-[20%]  sm:left-[10%] z-[10] text-black border-2 border-[#e0c3a6] py-[10px] px-[20px] rounded-lg shadow-xl"
+                        className="card absolute max-w-lg w-[90%] sm:w-full  bg-white top-[2%] left-3 sm:top-[20%]  sm:left-[10%] z-[10] text-black border-2 border-[#e0c3a6] py-[10px] px-[20px] rounded-lg shadow-xl"
                         // style={{ top: '20%', left: '10%', zIndex: 10 }}
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
@@ -183,11 +183,18 @@ export default function Home() {
                             <p className="text-center text-gray-600">
                                 🌟 Let's envision a life where every day is an extension of this beautiful moment. Together, we will create memories that last forever. 🌟
                             </p>
+
+                            {/* Mention the wedding date */}
+                            <p className="text-center text-gray-700 font-semibold mt-2">
+                                Save the Date: <span className="text-[#af795d]">30 September 2024</span>
+                            </p>
+
                             <div className="mt-4">
                                 <p>Scan for live location:</p>
                                 <img className='max-sm:w-[100px] m-auto' src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.google.com/maps?q=22.3946047,88.4960977" alt="QR Code" />
                             </div>
                         </div>
+
                     </motion.div>
 
 
