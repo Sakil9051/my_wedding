@@ -121,14 +121,14 @@ export default function Home() {
             {contentVisible && (
                 <>
                     <motion.div
-                        className="card absolute max-w-lg w-full  bg-white text-black border-2 border-[#e0c3a6] py-[10px] px-[20px] rounded-lg shadow-xl"
-                        style={{ top: '20%', left: '10%', zIndex: 10 }}
+                        className="card absolute max-w-lg w-[90%] sm:w-full  bg-white top-[10%] left-5 sm:top-[20%]  sm:left-[10%] z-[10] text-black border-2 border-[#e0c3a6] py-[10px] px-[20px] rounded-lg shadow-xl"
+                        // style={{ top: '20%', left: '10%', zIndex: 10 }}
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 1, delay: 0.2 }}
                     >
                         <motion.div
-                            className="floral-right absolute top-1 left-1 w-[100px] h-[80px] bg-no-repeat bg-cover"
+                            className="floral-right absolute top-1 left-1 w-[70px] h-[50px] sm:w-[100px] sm:h-[80px] bg-no-repeat bg-cover"
                             style={{ backgroundImage: 'url(/data/Flower_bukey.png)' }}
                             initial={{ y: 0 }}  // Start at initial position
                             animate={{ y: [-5, 5, -5] }}  // Moves up by 5px, down by 5px, and back
@@ -140,7 +140,7 @@ export default function Home() {
                             }}
                         />
 
-                        <motion.div className="leaves absolute bottom-1 left-1 w-[100px] h-[80px] bg-no-repeat bg-cover"
+                        <motion.div className="leaves absolute bottom-1 left-1 w-[70px] h-[50px] sm:w-[100px] sm:h-[80px] bg-no-repeat bg-cover"
                             style={{ backgroundImage: 'url(/data/Leavs.png)' }}
                             initial={{ y: 0 }}  // Start at initial position
                             animate={{ y: [-5, 5, -5] }}  // Moves up by 5px, down by 5px, and back
@@ -151,7 +151,7 @@ export default function Home() {
                                 repeatType: "loop"
                             }}
                         />
-                        <motion.div className="leaves2 absolute top-1 right-1 w-[100px] h-[80px] bg-no-repeat bg-cover" style={{ backgroundImage: 'url(/data/Leavs.png)' }}
+                        <motion.div className="leaves2 absolute top-1 right-1 w-[70px] h-[50px] sm:w-[100px] sm:h-[80px] bg-no-repeat bg-cover" style={{ backgroundImage: 'url(/data/Leavs.png)' }}
                             initial={{ y: 0 }}  // Start at initial position
                             animate={{ y: [-5, 5, -5] }}  // Moves up by 5px, down by 5px, and back
                             transition={{
@@ -161,7 +161,7 @@ export default function Home() {
                                 repeatType: "loop"
                             }}
                         />
-                        <motion.div className="floral absolute bottom-1 right-1 w-[100px] h-[80px] bg-no-repeat bg-cover" style={{ backgroundImage: 'url(/data/Flowers.png)' }}
+                        <motion.div className="floral absolute bottom-1 right-1 w-[70px] h-[50px] sm:w-[100px] sm:h-[80px] bg-no-repeat bg-cover" style={{ backgroundImage: 'url(/data/Flowers.png)' }}
                             initial={{ y: 0 }}  // Start at initial position
                             animate={{ y: [-5, 5, -5] }}  // Moves up by 5px, down by 5px, and back
                             transition={{
@@ -172,7 +172,7 @@ export default function Home() {
                             }}
                         />
                         <div className='flex flex-col justify-center items-center w-full h-full gap-[10px]'>
-                            <h1 className="font-bold text-3xl">Sahil & Thania</h1>
+                            <h1 className="font-bold text-3xl z-10">Sahil & Thania</h1>
                             <h2>Are Getting Married!</h2>
                             <p>Join us for the celebration of love</p>
                             {/* Shortened thank-you message */}
@@ -185,7 +185,7 @@ export default function Home() {
                             </p>
                             <div className="mt-4">
                                 <p>Scan for live location:</p>
-                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.google.com/maps?q=22.3946047,88.4960977" alt="QR Code" />
+                                <img className='max-sm:w-[100px] m-auto' src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.google.com/maps?q=22.3946047,88.4960977" alt="QR Code" />
                             </div>
                         </div>
                     </motion.div>
@@ -194,7 +194,7 @@ export default function Home() {
 
                     <motion.img
                         src="/data/Couple_Image.png"
-                        className="couple absolute"
+                        className="couple absolute hidden sm:block"
                         style={{ top: '20%', right: '15%', zIndex: 10 }}
                         alt="Couple Standing"
                         initial={{ opacity: 0 }}
@@ -202,9 +202,10 @@ export default function Home() {
                         transition={{ duration: 1.5, delay: 0.5 }}
                     />
 
+
                     <motion.div
-                        className="gift fixed right-10 bottom-10 bg-no-repeat bg-cover cursor-pointer"
-                        style={{ backgroundImage: 'url(/data/Gifts.png)', width: '200px', height: '200px', zIndex: 15 }}
+                        className="gift fixed right-10 bottom-1 sm:bottom-10 bg-no-repeat bg-cover cursor-pointer w-[100px] h-[100px] z-[15] sm:w-[200px] sm:h-[200px]"
+                        style={{ backgroundImage: 'url(/data/Gifts.png)' }}
                         initial={{ y: 0 }}
                         animate={{ y: [0, -20, 0] }}  // Moves up by 20 pixels, then back down
                         transition={{
