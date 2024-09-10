@@ -240,7 +240,7 @@ export default function Home() {
                         </p>
                         <h3 className="text-lg font-semibold mt-4"><GiPartyPopper className="inline mr-2" /> Special Features & Announcements</h3>
                         <p className="text-sm text-gray-600">
-                            <IoIosRose className="inline mr-2" /> Don’t miss the <strong>Lucy Drow event</strong> on our wedding day, <strong>September 30th</strong> 🌹. This unique feature is designed to add a special touch to our celebration, and we can’t wait for you to experience it!
+                            <IoIosRose className="inline mr-2" /> Don’t miss the <strong>Lucky Drow event</strong> on our wedding day, <strong>September 30th</strong> 🌹. This unique feature is designed to add a special touch to our celebration, and we can’t wait for you to experience it!
                         </p>
                         <p className="text-sm text-gray-600">
                             <FaMusic className="inline mr-2" /> Also, we're excited to announce that the <strong>contest results</strong> will be revealed on our website following the wedding. There will be two winners: <strong>1st and 2nd place</strong> 🥇🥈. Be sure to check the site on <strong>October 1st and 2nd</strong> to see if you're one of the lucky winners!
