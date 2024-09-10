@@ -172,7 +172,7 @@ export default function Home() {
                             }}
                         />
                         <div className='flex flex-col justify-center items-center w-full h-full gap-[10px]'>
-                            <h1 className="font-bold text-3xl z-10">Sahil & Thania</h1>
+                            <h1 className="font-bold text-3xl z-10">Sahil & Tania</h1>
                             <h2>Are Getting Married!</h2>
                             <p>Join us for the celebration of love</p>
                             {/* Shortened thank-you message */}
