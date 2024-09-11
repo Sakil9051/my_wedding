@@ -121,8 +121,7 @@ export default function Home() {
             {contentVisible && (
                 <>
                     <motion.div
-                        className="card absolute max-w-lg w-[90%] sm:w-full  bg-white top-[2%] left-3 sm:top-[20%]  sm:left-[10%] z-[10] text-black border-2 border-[#e0c3a6] py-[10px] px-[20px] rounded-lg shadow-xl"
-                        // style={{ top: '20%', left: '10%', zIndex: 10 }}
+                        className="card absolute max-w-lg w-[95%] sm:w-full  bg-white top-[2%] left-3 sm:top-[8%]  sm:left-[10%] z-[10] text-black border-2 border-[#e0c3a6] py-[10px] px-[20px] rounded-lg shadow-xl"
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 1, delay: 0.2 }}
@@ -174,19 +173,28 @@ export default function Home() {
                         <div className='flex flex-col justify-center items-center w-full h-full gap-[10px]'>
                             <h1 className="font-bold text-3xl z-10">Sahil & Tania</h1>
                             <h2>Are Getting Married!</h2>
-                            <p>Join us for the celebration of love</p>
-                            {/* Shortened thank-you message */}
+
                             <p className="text-center text-gray-600 mt-4">
-                                Thank you for celebrating this joyful day with us! Your presence truly enriches our celebration and starts our journey with joy.
+                                By the grace of Almighty Allah, we are excited to share this special moment with you.
+                            </p>
+
+                            <p className='max-sm:hidden'>Join us for a celebration of love.</p>
+
+                            <p className="text-center text-gray-600 mt-4 max-sm:hidden">
+                                Thank you for being part of our big day. Your presence means the world to us.
+                            </p>
+
+                            <p className="text-center text-gray-700 font-semibold mt-2">
+                                Save the Date: <span className="text-[#af795d]">30 September 2024</span> | Time: <span className="text-[#af795d]">Afternoon</span>
                             </p>
 
                             <p className="text-center text-gray-600">
-                                🌟 Let's envision a life where every day is an extension of this beautiful moment. Together, we will create memories that last forever. 🌟
-                            </p>
-
-                            {/* Mention the wedding date */}
-                            <p className="text-center text-gray-700 font-semibold mt-2">
-                                Save the Date: <span className="text-[#af795d]">30 September 2024</span>
+                                Grandfather of the groom: Late Moslem Sanfui <br />
+                                Grandmother of the groom: Angurjan Bibi <br />
+                                Father of the groom: Sahabuddin Laskar <br />
+                                Mother of the groom: Momtaj Bibi <br />
+                                Father of the bride: Imdadul Islam <br />
+                                Mother of the bride: Late Parvin Nahar Islam
                             </p>
 
                             <div className="mt-4">
@@ -195,14 +203,17 @@ export default function Home() {
                             </div>
                         </div>
 
+
+
+
                     </motion.div>
 
 
 
                     <motion.img
-                        src="/data/Couple_Image.png"
+                        src="/data/muslim-bride.jpg"
                         className="couple absolute hidden sm:block"
-                        style={{ top: '20%', right: '15%', zIndex: 10 }}
+                        style={{ top: '22%', right: '13%', zIndex: 10 }}
                         alt="Couple Standing"
                         initial={{ opacity: 0 }}
                         animate={contentVisible ? { opacity: 1 } : {}}
@@ -211,7 +222,7 @@ export default function Home() {
 
 
                     <motion.div
-                        className="gift fixed right-10 bottom-1 sm:bottom-10 bg-no-repeat bg-cover cursor-pointer w-[100px] h-[100px] z-[15] sm:w-[200px] sm:h-[200px]"
+                        className="gift fixed right-10 bottom-1 sm:bottom-10 bg-no-repeat bg-cover cursor-pointer w-[80px] h-[80px] z-[15] sm:w-[200px] sm:h-[200px]"
                         style={{ backgroundImage: 'url(/data/Gifts.png)' }}
                         initial={{ y: 0 }}
                         animate={{ y: [0, -20, 0] }}  // Moves up by 20 pixels, then back down
