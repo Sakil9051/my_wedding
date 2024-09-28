@@ -1,10 +1,9 @@
 "use client";
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaRegSmileBeam, FaMusic, FaGift } from 'react-icons/fa';
+import { FaRegSmileBeam, FaMusic, FaGift, FaTrophy, FaCrown } from 'react-icons/fa';
 import { IoIosRose } from 'react-icons/io';
 import { GiPartyPopper } from "react-icons/gi";
-
 
 export default function Home() {
     const [modalOpen, setModalOpen] = useState(false);
@@ -13,18 +12,36 @@ export default function Home() {
     const [message, setMessage] = useState(null);
     const [contentVisible, setContentVisible] = useState(false);
     const [isButtonHidden, setIsButtonHidden] = useState(false);
+    const [winners, setWinners] = useState([]); // Add state for winners
     const audioRef = useRef(null);
 
     useEffect(() => {
-
         audioRef.current = new Audio('/Indian_Wedding_Background_Music.mp3');
-        audioRef.current.loop = true;  // Set audio to loop
-        audioRef.current.volume = 0.4;  // Set volume to 40%
+        audioRef.current.loop = true;
+        audioRef.current.volume = 0.4; // Set volume to 40%
+
+        // Fetch the winners from the API
+        const fetchWinners = async () => {
+            try {
+                const response = await fetch('/api/winners');
+                const data = await response.json();
+                if (response.ok) {
+                    setWinners(data.winners); // Set the winners data
+                } else {
+                    throw new Error(data.message || 'Failed to fetch winners.');
+                }
+            } catch (error) {
+                console.error('Error fetching winners:', error);
+            }
+        };
+
+        fetchWinners(); // Fetch winners when the page loads
+
         // Check local storage for an existing unique code for Lucy Drow
         const storedCode = localStorage.getItem('uniqueCodeLucyDrow');
         if (storedCode) {
             setUniqueCode(storedCode);
-            setIsButtonHidden(true);  // Hide the button if the code is already generated
+            setIsButtonHidden(true); // Hide the button if the code is already generated
         }
     }, []);
 
@@ -33,7 +50,7 @@ export default function Home() {
         setTimeout(() => {
             setContentVisible(true);
             audioRef.current.play();
-        }, 2100); // slightly longer than the door animation to ensure it completes
+        }, 2100); // Slightly longer than the door animation to ensure it completes
     };
 
     const handleSubmit = async (event) => {
@@ -51,8 +68,8 @@ export default function Home() {
                 if (response.ok) {
                     setUniqueCode(data.uniqueCode);
                     setMessage({ text: `Unique code generated successfully for ${inputName}.`, type: 'success' });
-                    localStorage.setItem('uniqueCodeLucyDrow', data.uniqueCode);  // Save the code to local storage
-                    setIsButtonHidden(true);  // Hide the button after generating the code
+                    localStorage.setItem('uniqueCodeLucyDrow', data.uniqueCode); // Save the code to local storage
+                    setIsButtonHidden(true); // Hide the button after generating the code
                 } else {
                     throw new Error(data.message || 'Failed to generate unique code.');
                 }
@@ -62,10 +79,8 @@ export default function Home() {
         }
     };
 
-
     return (
         <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-[#fef3e6] to-white overflow-hidden relative">
-
             <motion.div className="absolute w-full h-screen flex">
                 <motion.div
                     initial={{ rotateY: 0 }}
@@ -82,7 +97,7 @@ export default function Home() {
                     <motion.img
                         src="/data/Flower_bukey.png"
                         className='mt-[180px]'
-                        style={{ width: 'auto', maxHeight: '50%' }}  // Adjust sizing as needed
+                        style={{ width: 'auto', maxHeight: '50%' }}
                     />
                 </motion.div>
                 <motion.div
@@ -100,12 +115,10 @@ export default function Home() {
                     <motion.img
                         src="/data/Flower_bukey.png"
                         className='mt-[180px]'
-                        style={{ width: 'auto', maxHeight: '50%' }}  // Adjust sizing as needed
+                        style={{ width: 'auto', maxHeight: '50%' }}
                     />
                 </motion.div>
             </motion.div>
-
-
 
             {!doorsOpen && (
                 <button
@@ -116,12 +129,37 @@ export default function Home() {
                 </button>
             )}
 
-
-
             {contentVisible && (
                 <>
+                    {/* Enhanced Winner Announcement with Icons */}
+                    {winners.length > 0 && (
+                        <motion.div
+                            className="absolute top-[10%] z-30 p-4 bg-white rounded-lg shadow-lg text-center border-2 border-[#c98a6d] w-[60vw]  mx-auto"
+                            initial={{ scale: 0.9, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            transition={{ duration: 0.6, ease: "easeInOut" }}
+                        >
+                            <h2 className="text-4xl font-bold text-[#c98a6d] flex items-center justify-center gap-2">
+                                <GiPartyPopper /> Our Lucky Draw Winners! <GiPartyPopper />
+                            </h2>
+
+                            <p className="text-2xl mt-4 flex items-center justify-center gap-2">
+                                <FaCrown className="text-yellow-600" /><span className="text-yellow-600"> 1st Winner:</span> <strong className='text-black'>{winners[0]?.name}</strong>
+                             <span className='text-black'>(Code: {winners[0]?.uniqueCode})</span>
+                            </p>
+
+                            {winners[1] && (
+                                <p className="text-2xl mt-4 flex items-center justify-center gap-2">
+                                    <FaTrophy className="text-yellow-600" /><span className="text-yellow-600"> 2nd Winner: </span> <strong className='text-black'>{winners[1]?.name}</strong>
+                                <span className='text-black'>  (Code: {winners[1]?.uniqueCode}) </span> 
+                                </p>
+                            )}
+                        </motion.div>
+                    )}
+
+                    {/* Additional content and animations */}
                     <motion.div
-                        className="card absolute max-w-lg w-[95%] sm:w-full  bg-white top-[2%] left-3 sm:top-[8%]  sm:left-[10%] z-[10] text-black border-2 border-[#e0c3a6] py-[10px] px-[20px] rounded-lg shadow-xl"
+                        className="card absolute max-w-lg w-[95%] sm:w-full bg-white top-[2%] left-3 sm:top-[8%] sm:left-[10%] z-[10] text-black border-2 border-[#e0c3a6] py-[10px] px-[20px] rounded-lg shadow-xl"
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 1, delay: 0.2 }}
@@ -129,44 +167,45 @@ export default function Home() {
                         <motion.div
                             className="floral-right absolute top-1 left-1 w-[70px] h-[50px] sm:w-[100px] sm:h-[80px] bg-no-repeat bg-cover"
                             style={{ backgroundImage: 'url(/data/Flower_bukey.png)' }}
-                            initial={{ y: 0 }}  // Start at initial position
-                            animate={{ y: [-5, 5, -5] }}  // Moves up by 5px, down by 5px, and back
+                            initial={{ y: 0 }}
+                            animate={{ y: [-5, 5, -5] }}
                             transition={{
-                                duration: 4,  // Slower duration for a subtle effect
+                                duration: 4,
                                 ease: "easeInOut",
-                                repeat: Infinity,  // Repeats the animation forever
+                                repeat: Infinity,
                                 repeatType: "loop"
                             }}
                         />
-
                         <motion.div className="leaves absolute bottom-1 left-1 w-[70px] h-[50px] sm:w-[100px] sm:h-[80px] bg-no-repeat bg-cover"
                             style={{ backgroundImage: 'url(/data/Leavs.png)' }}
-                            initial={{ y: 0 }}  // Start at initial position
-                            animate={{ y: [-5, 5, -5] }}  // Moves up by 5px, down by 5px, and back
+                            initial={{ y: 0 }}
+                            animate={{ y: [-5, 5, -5] }}
                             transition={{
-                                duration: 4,  // Slower duration for a subtle effect
+                                duration: 4,
                                 ease: "easeInOut",
-                                repeat: Infinity,  // Repeats the animation forever
+                                repeat: Infinity,
                                 repeatType: "loop"
                             }}
                         />
-                        <motion.div className="leaves2 absolute top-1 right-1 w-[70px] h-[50px] sm:w-[100px] sm:h-[80px] bg-no-repeat bg-cover" style={{ backgroundImage: 'url(/data/Leavs.png)' }}
-                            initial={{ y: 0 }}  // Start at initial position
-                            animate={{ y: [-5, 5, -5] }}  // Moves up by 5px, down by 5px, and back
+                        <motion.div className="leaves2 absolute top-1 right-1 w-[70px] h-[50px] sm:w-[100px] sm:h-[80px] bg-no-repeat bg-cover"
+                            style={{ backgroundImage: 'url(/data/Leavs.png)' }}
+                            initial={{ y: 0 }}
+                            animate={{ y: [-5, 5, -5] }}
                             transition={{
-                                duration: 4,  // Slower duration for a subtle effect
+                                duration: 4,
                                 ease: "easeInOut",
-                                repeat: Infinity,  // Repeats the animation forever
+                                repeat: Infinity,
                                 repeatType: "loop"
                             }}
                         />
-                        <motion.div className="floral absolute bottom-1 right-1 w-[70px] h-[50px] sm:w-[100px] sm:h-[80px] bg-no-repeat bg-cover" style={{ backgroundImage: 'url(/data/Flowers.png)' }}
-                            initial={{ y: 0 }}  // Start at initial position
-                            animate={{ y: [-5, 5, -5] }}  // Moves up by 5px, down by 5px, and back
+                        <motion.div className="floral absolute bottom-1 right-1 w-[70px] h-[50px] sm:w-[100px] sm:h-[80px] bg-no-repeat bg-cover"
+                            style={{ backgroundImage: 'url(/data/Flowers.png)' }}
+                            initial={{ y: 0 }}
+                            animate={{ y: [-5, 5, -5] }}
                             transition={{
-                                duration: 4,  // Slower duration for a subtle effect
+                                duration: 4,
                                 ease: "easeInOut",
-                                repeat: Infinity,  // Repeats the animation forever
+                                repeat: Infinity,
                                 repeatType: "loop"
                             }}
                         />
@@ -202,13 +241,7 @@ export default function Home() {
                                 <img className='max-sm:w-[100px] m-auto' src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.google.com/maps?q=22.3946047,88.4960977" alt="QR Code" />
                             </div>
                         </div>
-
-
-
-
                     </motion.div>
-
-
 
                     <motion.img
                         src="/data/muslim-bride.jpg"
@@ -220,25 +253,20 @@ export default function Home() {
                         transition={{ duration: 1.5, delay: 0.5 }}
                     />
 
-
                     <motion.div
                         className="gift fixed right-10 bottom-1 sm:bottom-10 bg-no-repeat bg-cover cursor-pointer w-[80px] h-[80px] z-[15] sm:w-[200px] sm:h-[200px]"
                         style={{ backgroundImage: 'url(/data/Gifts.png)' }}
                         initial={{ y: 0 }}
-                        animate={{ y: [0, -20, 0] }}  // Moves up by 20 pixels, then back down
+                        animate={{ y: [0, -20, 0] }}
                         transition={{
-                            duration: 0.6,  // Adjust duration based on how quick you want the bounce
+                            duration: 0.6,
                             ease: "easeInOut",
-                            repeat: Infinity,  // Repeats the animation forever
+                            repeat: Infinity,
                             repeatType: "loop",
-                            repeatDelay: 0.5  // No delay in repeating the animation
+                            repeatDelay: 0.5
                         }}
                         onClick={() => setModalOpen(true)}
                     />
-
-
-
-
                 </>
             )}
 
@@ -275,10 +303,6 @@ export default function Home() {
                     </div>
                 </div>
             )}
-
-
-
-
         </div>
     );
 }
